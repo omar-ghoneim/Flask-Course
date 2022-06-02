@@ -1,0 +1,88 @@
+{%extends "layout.html"%}
+{% block content%}
+<!-- Tabs -->
+<div class="container my-5">
+    <nav>
+        <div class="nav nav-tabs" id="tablist">
+            <button class="nav-link active" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                type="button" role="tab" aria-controls="nav-profile" aria-selected="true">Profile</button>
+        </div>
+    </nav>
+    <!-- Tab contents here -->
+    <div class="tab-content" id="nav-tabContent">
+        <!-- Profile -->
+        <div class="tab-pane show active fade p-3" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <form action=" " method="POST" enctype="multipart/form-data">
+                {{ profile_form.hidden_tag() }}
+                <fieldset class='form-group'>
+                    <legend class='border-bottom mb-4'>Personal Information</legend>
+                    <img class="rounded-circle user-img" src="{{image_file}}" alt="">
+                    <div class='form-group'>
+                        <div class="row mb-3">
+                            <div class="col">
+                                <label for="fname" class="form-label">First Name</label>
+                                <input class="form-control" type="text" value="{{ current_user.fname}}" readonly>
+                            </div>
+                            <div class="col">
+                                <label for="lname" class="form-label">Last Name</label>
+                                <input class="form-control" type="text" value="{{ current_user.lname}}" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col">
+                                {{ profile_form.username.label(class='form-control-label')}}
+                                {% if profile_form.username.errors%}
+                                {{ profile_form.username(class='form-control form-control-lg is-invalid')}}
+                                <div class="invalid-feedback">
+                                    {% for error in profile_form.username.errors %}
+                                    <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ profile_form.username(class='form-control form-control')}}
+                                {% endif %}
+                            </div>
+                            <div class="col">
+                                {{ profile_form.email.label(class='form-control-label')}}
+                                {% if profile_form.email.errors%}
+                                {{ profile_form.email(class='form-control form-control-lg is-invalid')}}
+                                <div class="invalid-feedback">
+                                    {% for error in profile_form.email.errors %}
+                                    <span>{{error}}</span>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                {{ profile_form.email(class='form-control form-control')}}
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend class="border-bottom my-3">Biography</legend>
+                    <div class="form-group">
+                        <div class="my-3">
+                            {{ profile_form.bio.label(class='form-control-label') }}
+                            {{ profile_form.bio(class='form-control') }}
+                        </div>
+                        <div class="form-group mb-3">
+                            {{ profile_form.picture.label}}
+                            {{ profile_form.picture(class='form-control-file')}}
+                            {% if profile_form.picture.errors %}
+                            {% for error in profile_form.picture.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-success" type="submit">Update</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock content %}
