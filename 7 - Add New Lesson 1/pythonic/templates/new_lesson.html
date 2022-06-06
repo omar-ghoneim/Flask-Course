@@ -1,0 +1,82 @@
+{% extends "dashboard.html"%}
+{% block new_lesson %}
+
+<div class="{{'tab-pane show active fade p-3' if active_tab=='new_lesson' else 'tab-pane fade p-3'}}" id="nav-newLesson"
+    role="tabpanel" aria-labelledby="nav-newLesson-tab">
+    <form action="/dashboard/new_lesson" method="POST">
+        {{ new_lesson_form.hidden_tag()}}
+        <legend class="border-bottom my-3">New Lesson</legend>
+        <div class="mb-3">
+            <label for="courses" class="form-label">Course</label>
+            <select class="form-select">
+                <option selected>Choose a Course</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#newCourse">
+                New Course?
+            </button>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="title">
+        </div>
+        <div class="mb-3">
+            <label for="slug" class="form-label">Slug</label>
+            <input type="slug" class="form-control" id="title"
+                placeholder="Descriptive Short version of your title. SEO friendly">
+        </div>
+        <div class="mb-3">
+            <label for="Lesson" class="form-label">Lesson Article</label>
+            <textarea class="form-control" id="Lesson" rows="20"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="LessonImg" class="form-label">Lesson Image</label>
+            <input type="file" class="form-control" id="LessonImg">
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-12">
+                <button class="btn btn-success" type="submit">Post</button>
+            </div>
+        </div>
+    </form>
+    <div class="modal fade" id="newCourse" tabindex="-1" aria-labelledby="newCourseModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newCourseModal">Create New Course</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="">
+                        <div class="mb-3">
+                            <label for="CourseName" class="form-label">Course Name</label>
+                            <input type="text" class="form-control" id="CourseName" placeholder="Course Name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="CourseDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="CourseDescription" rows="3"></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="CourseImg" class="form-label">Course Image</label>
+                            <input type="file" class="form-control" id="CourseImg">
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock new_lesson %}
