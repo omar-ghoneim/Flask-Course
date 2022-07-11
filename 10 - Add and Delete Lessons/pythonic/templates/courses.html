@@ -1,0 +1,28 @@
+{% extends "layout.html"%}
+{% block content %}
+
+<section class="bg-ligh">
+    <div class="container p-5">
+        <h3 class="text-center text-secondary" id='learn'>Courses</h3>
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-sm-12 col-md-6 col-lg-4 p-3 d-flex align-items-stretch">
+                <a href="{{url_for('course', course_title=course.title)}}" class="text-decoration-none">
+                    <div class="card bg-dark text-light h-100">
+                        <div class="card-body text-center">
+                            <img src="{{url_for('static', filename='course_icons/'+course.icon)}}" alt=""
+                                class="card-img w-25">
+                            <h4 class="card-title mb-3">
+                                {{course.title}}
+                            </h4>
+                            <p class="card-text">{{course.description}}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

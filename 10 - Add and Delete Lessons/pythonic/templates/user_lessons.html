@@ -1,0 +1,63 @@
+{% extends "dashboard.html"%}
+{% block user_lessons %}
+
+<div class="{{'tab-pane fade show active p-3' if active_tab == 'user_lessons' else 'tab-pane fade p-3'}}"
+    id='nav-user_lessons' role="tabpanel" aria-labelledby="nav-user_lessons-tab"></div>
+
+<section>
+    <div class="container p-5">
+        <div class="row mb-5 ">
+        </div>
+        <div class="row">
+            {% for lesson in current_user.lessons %}
+            <div class="col-sm-12 col-md-6 col-lg-4 pb-5 d-flex align-items-stretch">
+                <div class="card lesson">
+                    <img src="{{url_for('static', filename='lesson_thumbnails/'+lesson.thumbnail)}}" class="card-img">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a class="text-decoration-none text-dark"
+                                href="{{url_for('lesson', lesson_slug=lesson.slug, course=lesson.course_name.title)}}">{{lesson.title}}</a>
+                        </h5>
+                        <span><img class="article-img rounded-circle"
+                                src="{{url_for('static', filename='user_pics/'+lesson.author.image_file)}}" alt="">By:
+                            <a href="#" class="link">{{lesson.author.username}}</a></span>
+                        <span class="text-muted">On: {{lesson.date_posted.strftime('%Y-%m-%d')}}</span>
+                        <div class="m-auto">
+                            <a href="{{url_for('update_lesson', lesson_slug = lesson.slug, course = lesson.course_name.title)}}"
+                                class="btn btn-info btn-sm m-1">Update</a>
+                            <button class="btn btn-danger btn-sm m-1" data-bs-toggle="modal"
+                                data-bs-target="#deleteModal"> Delete </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Delete Modal -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Lesson?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete the lesson. This cannot be undone!
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="{{ url_for('delete_lesson', lesson_id = lesson.id)}}" method="POST">
+                                <input type="submit" class="btn btn-danger" value="Delete">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock user_lessons%}

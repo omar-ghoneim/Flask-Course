@@ -1,0 +1,77 @@
+{% extends "lesson.html"%}
+{% block lesson %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag()}}
+    <legend class="border-bottom my-3">Update Lesson</legend>
+    <div class="mb-3">
+        {{ form.course.label(class='form-control-label')}}
+        {% if form.course.errors %}
+        {{ form.course(class='form-contro is-invalid')}}
+        <div class="invalid-feedback">
+            {% for error in form.course.errors %}
+            <span>{{ error }} </span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.course(class='form-select')}}
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.title.label(class='form-control-label')}}
+        {% if form.title.errors %}
+        {{ form.title(class='form-control is-invalid')}}
+        <div class="invalid-feedback">
+            {% for error in form.title.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.title(class='form-control')}}
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.slug.label(class='form-control-label')}}
+        {% if form.slug.errors %}
+        {{ form.slug(class='form-control is-invalid')}}
+        <div class="invalid-feedback">
+            {% for error in form.slug.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.slug(class='form-control')}}
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.content.label(class='form-control-label')}}
+        {% if form.content.errors %}
+        {{ form.content(class='form-control is-invalid')}}
+        <div class="invalid-feedback">
+            {% for error in form.content.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+        </div>
+        {% else %}
+        {{ form.content(class='form-control')}}
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.thumbnail.label(class='form-control-label')}}
+        {{ form.thumbnail(class='form-control-file')}}
+        {% if form.thumbnail.errors %}
+        {% for error in form.thumbnail.errors %}
+        <span class="text-danger">{{ error }}</span>
+        {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <button class="btn btn-success" type="submit">Update</button>
+        </div>
+    </div>
+</form>
+{{ ckeditor.load() }}
+{{ ckeditor.config(name='content')}}
+{% endblock lesson %}
