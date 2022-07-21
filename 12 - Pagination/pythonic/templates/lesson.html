@@ -1,0 +1,69 @@
+{% extends "layout.html"%}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <!-- article contents -->
+        <div class="col-lg-8 col-md-12">
+            {% block lesson %} {% endblock lesson %}
+            <!--  previous and next lesson -->
+            <div class="row justify-content-md-center">
+                <div class="col-4">
+                    {% if previous_lesson %}
+                    <a
+                        href="{{url_for('lesson', lesson_slug=previous_lesson.slug, course=previous_lesson.course_name.title)}}">
+                        <button class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="{{previous_lesson.title}}">
+                            &lt&lt&lt Previous Lesson
+                        </button>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col-4">
+                    {% if next_lesson %}
+                    <a href="{{url_for('lesson', lesson_slug=next_lesson.slug, course=next_lesson.course_name.title)}}">
+                        <button class="btn btn-warning" type="button" data-bs-toggle="tooltip" data-bs-placement="top"
+                            title="{{next_lesson.title}}">
+                            &gt&gt&gt Next Lesson
+                        </button>
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- sidebar -->
+        <div class="col-4">
+            <!-- author -->
+            <div class="my-5">
+                <span><img class="article-img"
+                        src="{{url_for('static',filename='user_pics/'+lesson.author.image_file)}}" alt="">By:
+                    <a href="#" class="link">{{lesson.author.username}}</a>
+                    <span class="text-muted">On: {{lesson.date_posted.strftime('%Y-%m-%d')}}</span>
+                </span>
+            </div>
+            <!-- course icon -->
+            <img src="{{url_for('static', filename='course_icons/'+lesson.course_name.icon)}}" alt="">
+            <br>
+            <!-- list of lessons in this course -->
+            <ul class="list-group" style="display:inline-block">
+                {% for lsn in lesson.course_name.lessons %}
+                {% if lsn.title == lesson.title %}
+                <li class="list-group-item border active" aria-current="true">
+                    <a class="link text-light"
+                        href="{{url_for('lesson', lesson_slug=lsn.slug, course=lsn.course_name.title)}}">{{lsn.title}}</a>
+                </li>
+                {% else %}
+                <li class="list-group-item border" aria-current="false">
+                    <a class="link text-dark"
+                        href="{{url_for('lesson', lesson_slug=lsn.slug, course=lsn.course_name.title)}}">{{lsn.title}}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+    <br>
+
+</div>
+
+{% endblock content%}
