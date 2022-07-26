@@ -242,7 +242,7 @@ def new_lesson():
     elif form == "new_course_form" and new_course_form.validate_on_submit():
         course_title = str(new_course_form.title.data).replace(" ", "-")
         course = Course(
-            title=new_course_form.title.data,
+            title=course_title,
             description=new_course_form.description.data,
         )
         db.session.add(course)
