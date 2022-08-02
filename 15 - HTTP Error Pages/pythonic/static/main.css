@@ -1,0 +1,66 @@
+body::before {
+    display: block;
+    content: '';
+    height: 60px;
+}
+
+.card {
+    transition: 0.7s ease;
+    box-shadow: 0 5px 15px rgba(1 1 1/ 15);
+    border-radius: 5px;
+    margin: 5px;
+
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
+
+.lesson {
+    box-shadow: 0 5px 15px rgba(200 200 200/ 15);
+    border-radius: 5px;
+    border: 1px solid #fff;
+
+}
+
+.post:hover {
+    /* transform: scale(1.1); */
+    opacity: 0.9;
+}
+
+.button_width {
+    min-width: 120px;
+    max-width: 120px;
+}
+
+.article-img {
+    height: 65px;
+    width: 65px;
+    margin-right: 8px;
+}
+
+.user-img {
+    height: 150px;
+    width: 150px;
+    margin-right: 8px;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.nobull {
+    list-style-type: none;
+}
+
+.arabic-sc {
+    font-family: 'Rakkas', cursive;
+}
+
+.content-section {
+    background: #ffffff;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
