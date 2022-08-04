@@ -1,0 +1,36 @@
+{%extends "layout.html"%}
+{% block content%}
+<!-- Tabs -->
+<div class="container my-5">
+    <nav>
+        <div class="nav nav-tabs" id="tablist">
+            <a class="link" href="/dashboard/profile">
+                <button class="{{'nav-link active' if active_tab=='profile' else 'nav-link'}}" id="nav-profile-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab"
+                    aria-controls="nav-profile" aria-selected="true">Profile</button>
+            </a>
+
+            <a class="link" href="/dashboard/new_lesson">
+                <button class="{{'nav-link active' if active_tab=='new_lesson' else 'nav-link'}}" id="nav-newLesson-tab"
+                    data-bs-toggle="tab" data-bs-target="#nav-newLesson" type="button" role="tab"
+                    aria-controls="nav-newLesson" aria-selected="true">New Lesson</button>
+            </a>
+
+            <a class="link" href="/dashboard/user_lessons">
+                <button class="{{'nav-link active' if active_tab=='user_lessons' else 'nav-link'}}"
+                    id="nav-user_lessons-tab" data-bs-toggle="tab" data-bs-target="#nav-Lessons" type="button"
+                    role="tab" aria-controls="nav-Lessons" aria-selected="true">Your Lessons</button>
+            </a>
+        </div>
+    </nav>
+    <!-- Tab contents here -->
+    <div class="tab-content" id="nav-tabContent">
+        <!-- profile -->
+        {% block profile %} {% endblock profile%}
+        <!-- New Lesson -->
+        {% block new_lesson %} {% endblock new_lesson %}
+        <!-- User Lessons -->
+        {% block user_lessons %} {% endblock user_lessons %}
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,67 @@
+{% extends "layout.html"%}
+{% block content %}
+<!-- author image and bio -->
+<div class="container-fluid bg-secondary">
+    <div class="container">
+        <div class="row p-5">
+            <div class="col-6">
+                <img class="rounded-circle" src="{{url_for('static', filename='user_pics/' + user.image_file)}}" alt="">
+            </div>
+            <div class="col-6">
+                <span class="lead text-light">{{user.bio}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+<section class="bg-light">
+    <div class="container p-5">
+        <div class="row mb-5 ">
+        </div>
+        <div class="row">
+            {% for lesson in lessons.items %}
+            <div class="col-sm-12 col-md-6 col-lg-4 pb-5 d-flex align-items-stretch">
+                <div class="card lesson">
+                    <img src="{{url_for('static', filename='lesson_thumbnails/'+lesson.thumbnail)}}" class="card-img">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">
+                            <a class="text-decoration-none text-dark"
+                                href="{{url_for('lessons.lesson', lesson_slug=lesson.slug, course=lesson.course_name.title)}}">{{lesson.title}}</a>
+                        </h5>
+                        <p class="card-text mb-0">In:
+                            <a href="{{url_for('courses.course', course_title=lesson.course_name.title)}}"
+                                class="link">{{lesson.course_name.title}}</a>
+                        </p>
+                        <span class="text-muted">On: {{lesson.date_posted.strftime('%Y-%m-%d')}}</span>
+
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- pagination links -->
+            <nav class="mt-5" aria-label="...">
+                <ul class="pagination" style="display: flex; justify-content: flex-end">
+                    {% for page_num in lessons.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                    {% if lessons.page == page_num %}
+                    <li class="page-item active">
+                        <a href="{{url_for('users.author', username=user.username, page=page_num)}}"
+                            class="page-link">{{page_num}}</a>
+                    </li>
+                    {%else%}
+                    <li class="page-item">
+                        <a href="{{url_for('users.author', username=user.username, page=page_num)}}"
+                            class="page-link">{{page_num}}</a>
+                    </li>
+                    {%endif%}
+                    {% else %}
+                    <span class="mx-2">...</span>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+</section>
+
+{% endblock content%}
